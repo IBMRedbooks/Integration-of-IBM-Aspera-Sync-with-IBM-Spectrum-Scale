@@ -1,0 +1,20 @@
+/* define files and directories to be excluded from processing */
+define(
+    exclude_list,
+    (PATH_NAME LIKE '%/.SpaceMan/%'
+    OR PATH_NAME LIKE '%/.ctdb/%'
+    OR PATH_NAME LIKE '%/.private-asp/%'
+    OR PATH_NAME LIKE '%/.mmSharedTmpDir/%'
+    OR PATH_NAME LIKE '%/.snapshots/%'
+    OR NAME LIKE 'user.quota%'
+    OR NAME LIKE 'fileset.quota%'
+    OR NAME LIKE 'group.quota%')
+)
+
+/* external list rule with no interface script to avoid WARNING */
+RULE EXTERNAL LIST 'transfer-list' EXEC ''
+
+/* file selection rule, parameters FSETNAME and LAST_XFER are provided by the mmapplypolicy command */
+RULE 'transfer-list-rule' LIST 'transfer-list' FOR FILESET ('FSETNAME') WHERE 
+(MODIFICATION_TIME >= TIMESTAMP(LAST_XFER) OR CHANGE_TIME >= TIMESTAMP(LAST_XFER)) AND 
+NOT (exclude_list)

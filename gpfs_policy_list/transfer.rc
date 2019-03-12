@@ -1,0 +1,9 @@
+# Environment specific settings
+SOURCE_DIR=/gpfs/regular
+REMOTE_DIR=$SOURCE_DIR
+FSETNAME="testaspera"
+
+SSH_HOST=10.0.125.8
+SSH_USER=joseg
+SSH_KEY_PATH=/home/joseg/.ssh/id_rsa
+TRANSFER_RATE=1G

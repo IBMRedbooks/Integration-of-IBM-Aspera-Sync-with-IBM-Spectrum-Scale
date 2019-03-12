@@ -1,0 +1,11 @@
+
+The following mmapply policy command assumes that:
+- the file system is /ibm/userfs
+- the node where ascp runs on is g8_node1
+- one ascp process is launched (-m 1)
+- this ascp process processes 1000 files at a time (-B 1000)
+- the last run of the ascp command was on the date specified with LAST_XFER
+- the fileset name is "testaspera"
+
+# mmapplypolicy /ibm/userfs -P ascp_policy -N g8_node1 --single-instance -m 1 -B 1000 -M LAST_XFER=`date -d "2018-05-30 13:30:00" +%s` -M FSETNAME=testaspera
+
